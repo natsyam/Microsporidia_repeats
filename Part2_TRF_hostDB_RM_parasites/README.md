@@ -27,11 +27,14 @@ The initial analysis using BLAST revealed that the contribution of repeats simil
 
 Subsequent analysis using RepeatMasker and construction of Kimura plots produced the following results. In the genome of *Dictocoela muelleri*, the overall repeat content exceeded 8%, of which approximately half consisted of nearly simple (presumably tandem) repeats, typical for many organisms, while the remaining repeats were unclassified. The distribution of repeats by divergence showed that the majority of elements fall within the 15–30% divergence range, indicating their ancient origin.
 
-*Figure 1. Visualization of repeat landscapes using Kimura Plots for A. thaliana ecotype Kyr-1*
+The results obtained indicate that the hypothesis of extensive horizontal transfer of repeats from the host to microsporidia is not supported. The low contribution of repeats similar to the host library (about 4%), along with the predominance of repeats with high divergence (15–30%), suggests that the majority of the integrated elements are ancient. This may mean that these repeats were either acquired before a long time ago or represent false-positive annotations during the repeat identification process.
+
+*Figure 1. Visualization of repeat landscapes using Kimura Plots for Dictocoela muelleri*
 <img width="1357" alt="Снимок экрана 2025-02-09 в 13 24 37" src="https://github.com/user-attachments/assets/3e78c38b-c44a-4565-b143-8002f815039e" />
 
-In the genome of *Nosema granulosis*, the overall repeat content was about 3%. Here, the distribution of repeats along the Kimura axis exhibited a peak at around 10–15% divergence, and elements with low divergence (K < 5) were extremely rare. This suggests that active transposition is either very limited or absent in recent evolutionary times.
+In the genome of *Nosema granulosis*, the repeat content similar to the host's one was about 3%. Here, the distribution of repeats along the Kimura axis exhibited a peak at around 10–15% divergence, and elements with low divergence (K < 5) were extremely rare. This suggests that active transposition from host is either very limited or absent in recent evolutionary times.
 
+*Figure 2. Visualization of repeat landscapes using Kimura Plots for Nosema granulosis*
 <img width="1357" alt="Снимок экрана 2025-02-09 в 13 24 19" src="https://github.com/user-attachments/assets/42b3125e-5a89-417b-8f26-7d77a860d70d" />
 <img width="1352" alt="Снимок экрана 2025-02-09 в 13 23 57" src="https://github.com/user-attachments/assets/ebe7fb06-bd23-41aa-9d88-9f189c5a683b" />
 
@@ -43,22 +46,16 @@ A separate analysis of tandem repeats in the *D. muelleri* genome, performed usi
 | TRF repeats overlapping with RepeatMasker          | 30270 (66.19%)   |
 | Length of TRF repeats overlapping with RepeatMasker (bp) | 3414238 (75.17%) |
 
+Visualization of the repeat distribution using IGV confirmed the general trends; however, the low quality of the genome assembly limited the detail of the analysis. Due to the genome assembly not reaching chromosomal level, visualization via IGV was limited. It is necessary to consider alternative visualization methods that would allow a clearer representation of the repeat distribution across the genome.
 
-Visualization of the repeat distribution using IGV confirmed the general trends; however, the low quality of the genome assembly (lack of chromosomal-level resolution) limited the detail of the analysis.
-
-The results obtained indicate that the hypothesis of extensive horizontal transfer of repeats from the host to microsporidia is not supported. The low contribution of repeats similar to the host library (less than 1%), along with the predominance of repeats with high divergence (15–30%), suggests that the majority of the integrated elements are ancient. This may mean that these repeats were either acquired before the divergence from a common ancestor with the host or represent false-positive annotations during the repeat identification process.
-
-It is also observed that the genomes of microsporidia generally are not enriched in active mobile elements, which is consistent with expectations for such parasites with compact genomes. In the case of *Dictocoela muelleri*, a significant number of tandem repeats were additionally identified, warranting further detailed classification, as approximately 27% of the repeats remain unclassified.
-
-One unresolved issue is the presentation of the data. Due to the genome assembly not reaching chromosomal level, visualization via IGV was limited. It is necessary to consider alternative visualization methods that would allow a clearer representation of the repeat distribution across the genome.
-
+*Figure 3. Repeat distribution using IGV for D. mueller. Pink track is for RM repeats, green is TRF repeats and blue is genes annotation*
 <img width="964" alt="Снимок экрана 2025-02-09 в 22 25 21" src="https://github.com/user-attachments/assets/7adf0838-2d04-49fd-82d0-c11665564b14" />
 
 
 ## **Future Plans**
 
 - **Multi-step Execution of RepeatMasker:**
-  - Try the method described in the Harvard professor's tutorial, which involves multiple runs of RepeatMasker using different repeat libraries.
+  - Try the method described in the [Harvard professor's tutorial](https://darencard.net/blog/2022-07-09-genome-repeat-annotation/), which involves multiple runs of RepeatMasker using different repeat libraries [+manual TE curation guide](https://link.springer.com/article/10.1186/s13100-021-00259-7).
   - **Goal:** Reduce the percentage of "unknown" repeats and provide a more detailed characterization of the remaining elements.
 
 - **Search for Primate-Specific Repeats:**
@@ -67,9 +64,11 @@ One unresolved issue is the presentation of the data. Due to the genome assembly
 - **Phylogenetic Analysis of Repeats:**
   - Consider using GPAC (or similar programs) to construct a phylogeny of repeats.
   - Optionally, perform a similar analysis on a set of microsporidia to evaluate the evolutionary relationships among their repeat elements.
+ [Example from the article](https://link.springer.com/protocol/10.1007/978-1-4939-9074-0_6#Sec16)
+<img width="1032" alt="Снимок экрана 2025-02-10 в 10 21 00" src="https://github.com/user-attachments/assets/8a0a7f28-2923-45e1-946f-f471f2ca96b8" />
 
 - **Comparison of Repeat Detection Methods:**
-  - Use the REPET program, which is recommended for analyzing repeats in non-model invertebrates, and compare its results with those obtained using RepeatModeler/RepeatMasker.
+  - Use the REPET program, which is recommended for analyzing repeats in non-model invertebrates, and compare its results with those obtained using RepeatModeler/RepeatMasker. [Article](https://link.springer.com/protocol/10.1007/978-1-0716-2883-6_1?fromPaywallRec=false).
 
 
 ## **Conclusion**
