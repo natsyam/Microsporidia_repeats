@@ -1,5 +1,11 @@
 # **Part 2. Microsporidia_repeats**
 
+**Laboratory journals:**
+
+[Part 1. Host DB](https://colab.research.google.com/drive/1ecwUyJ3eySWaThJAYqe-W5jgIK0e5q0Y?usp=sharing)
+
+[Part 2. TRF](https://colab.research.google.com/drive/1Vxq8kZDsPDLfZRLhjDhqolMdON9RYUVV?usp=sharing)
+
 ## **Introduction**
 
 Microsporidia are intracellular parasites characterized by compact genomes and significant variation in genome size. One of the hypotheses proposed to explain this diversity is the possibility of horizontal transfer of repeats from the host to the parasite. In this study, we examine the hypothesis that parasites—specifically, microsporidia—may acquire repeats from their hosts, potentially contributing to changes in their genome sizes. To test this hypothesis, the genomes of two microsporidia parasitizing the same host, as well as that of the host itself, were analyzed. The organisms under investigation were *Dictocoela muelleri* and *Nosema granulosis* as representatives of the parasites, and *Gammarus roeselli* as the host.
@@ -38,6 +44,8 @@ In the genome of *Nosema granulosis*, the repeat content similar to the host's o
 <img width="1357" alt="Снимок экрана 2025-02-09 в 13 24 19" src="https://github.com/user-attachments/assets/42b3125e-5a89-417b-8f26-7d77a860d70d" />
 <img width="1352" alt="Снимок экрана 2025-02-09 в 13 23 57" src="https://github.com/user-attachments/assets/ebe7fb06-bd23-41aa-9d88-9f189c5a683b" />
 
+**Analysis of tandem repeats (TRF)**
+
 A separate analysis of tandem repeats in the *D. muelleri* genome, performed using TRF, showed that tandem repeats occupy 9.16% of the genome. The total number of TRF-detected repeats was 45,733, of which 30,270 (66.19%) overlapped with the RepeatMasker annotation, while the remaining 15,463 repeats were novel. The total length of TRF repeats was 4,542,284 bp, with 3,414,238 bp (75.17%) matching the RepeatMasker results.
 
 | Metric                                            | Value            |
@@ -47,6 +55,8 @@ A separate analysis of tandem repeats in the *D. muelleri* genome, performed usi
 | Length of TRF repeats overlapping with RepeatMasker (bp) | 3414238 (75.17%) |
 
 Visualization of the repeat distribution using IGV confirmed the general trends; however, the low quality of the genome assembly limited the detail of the analysis. Due to the genome assembly not reaching chromosomal level, visualization via IGV was limited. It is necessary to consider alternative visualization methods that would allow a clearer representation of the repeat distribution across the genome.
+
+**Combined repeats visualization**
 
 *Figure 3. Repeat distribution using IGV for D. mueller. Pink track is for RM repeats, green is TRF repeats and blue is genes annotation*
 <img width="964" alt="Снимок экрана 2025-02-09 в 22 25 21" src="https://github.com/user-attachments/assets/7adf0838-2d04-49fd-82d0-c11665564b14" />
