@@ -1,8 +1,10 @@
 # **Part 3. Phylogeny tree of repeats**
 
+[laboratory journal](https://colab.research.google.com/drive/11DVFrSG88UEFJSD8tNy8TVvt0u01eTQl?usp=sharing)
+
 ## **Introduction**
 
-Microsporidia are intracellular parasites characterized by compact genomes and significant variation in genome size. One of the hypotheses proposed to explain this diversity is the possibility of horizontal transfer of repeats from the host to the parasite. In this study, we examine the hypothesis that parasites—specifically, microsporidia—may acquire repeats from their hosts, potentially contributing to changes in their genome sizes. To test this hypothesis, the genomes of two microsporidia parasitizing the same host, as well as that of the host itself, were analyzed. The organisms under investigation were *Dictocoela muelleri* and *Nosema granulosis* as representatives of the parasites, and *Gammarus roeselli* as the host.
+In the current part of the study, we expanded the approach by examining the phylogenetic relationships among repeats. To do this, a phylogenetic tree was constructed based on the repeats common to the parasitic microsporidia (Dictocoela muelleri and Nosema granulosis) and their host (Gammarus roeselli). Data on the percentage of the genome occupied by each of these repeats was also incorporated into the tree, allowing us to assess their contribution to the overall genome structure.
  
 ## **Methods**
 
@@ -27,11 +29,17 @@ iqtree -s /content/aligned.fasta -m TEST -bb 1000 -nt AUTO
 
 ## **Results**
 
+A phylogenetic tree for parasite repeats similar to the host repeats was obtained. On the left is the version where branch lengths are ignored, and on the right is the variant with accurately represented branch lengths.
+
 *Figure 1. Visualization of phylogeny tree*
 <img width="1139" alt="Снимок экрана 2025-02-17 в 10 58 58" src="https://github.com/user-attachments/assets/9b238b33-1afb-4ed5-a6ad-f713e4e5a300" />
 
+The visualization of the tree alignment does not appear particularly optimal, which is most likely due to the use of different types of repeats in a single analysis.
+
 *Figure 2. Visualization of alignment*
 <img width="1367" alt="Снимок экрана 2025-02-16 в 00 57 09" src="https://github.com/user-attachments/assets/3427f13d-d05f-4bb6-873e-25d62c3af9b1" />
+
+Additionally, the tree was supplemented with data on the percentage of the genome occupied by each repeat.
 
 *Figure 3. Visualization of phylogeny tree with percentage of the genome each repeat occupy*
 <img width="1314" alt="Снимок экрана 2025-02-16 в 02 29 55" src="https://github.com/user-attachments/assets/d6c54d38-f340-472d-805c-0a5f9ed16433" />
@@ -51,5 +59,9 @@ iqtree -s /content/aligned.fasta -m TEST -bb 1000 -nt AUTO
 |            | n_granulosis_rnd-2_family-72#LINE/CR1     | 20       | 1039     | 20780    |
 |            | **host_rnd-1_family-11#LINE/CR1**              | 403      | 2041     | 822523   |
 |            | host_rnd-1_family-14#LINE/CR1              | 380      | 3824     | 1453120  |
+
+## **Conclusion**
+
+The resulting phylogenetic tree turned out to be unrooted, as it was unclear what to use as an outgroup given that entirely different groups of repeats were used to build the tree. Interestingly, not all LINE/CR1 repeats clustered together, which might indicate potential misclassification. However, a distinct clade can be observed that corresponds to the one obtained using CD-hit, where repeats from all three organisms are present, although their overall contribution is rather insignificant.
 
 
