@@ -2,6 +2,14 @@
 
 Laboratory journal: [Repeats_in_DM](https://colab.research.google.com/drive/1roHFfcjmrdVqhQhsiRW4li5k_tSIXpoZ?usp=sharing)
 
+## **Main Points**
+
+- The study focused on the microsporidian **Dictyocoela muelleri** and its "unknown" repeats.
+- Short sequences and simple sequence repeats (SSR) were filtered out.
+- Repeats were clustered using CD-HIT, and clusters contributing >0.1% of the genome were selected.
+- One dominant cluster accounted for 15% of the genome.
+- Eight ORFs were detected in this cluster, but they are small and likely non-functional, requiring further investigation.
+
 ## **Introduction**
 
 In this section, the focus was placed exclusively on repeats from D. muelleri. The study followed a comprehensive plan beginning with the extraction and preparation of "Unknown" repeats, followed by filtering out short sequences and simple sequence repeats (SSR).
