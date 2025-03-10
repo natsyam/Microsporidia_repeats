@@ -83,7 +83,7 @@ After clustering the repeats obtained de novo using RepeatModeler, as well as an
 
 *Table 1. Repeats with a high number of hits*
 
-| Family ID           | Unknown | NA | Value 1 | Value 2 | Value 3 | Value 4 | Value 5 | Value 6 | Value 7 |
+| Name               | Order   | Superfamily | Length in nucleotides | Family_Size | Number of good BLAST hits | MSA_Size | Localized_Contigs | Total_Contigs | Number of Pfam conserved domains |
 |---------------------|---------|----|---------|---------|---------|---------|---------|---------|---------|
 | rnd-1_family-3      | Unknown | NA | 658     | 1464    | 697     | 100     | 9327    | 11027   | 0       |
 | rnd-1_family-39     | Unknown | NA | 525     | 323     | 701     | 90      | 9327    | 11027   | 0       |
