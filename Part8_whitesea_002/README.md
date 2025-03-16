@@ -1,0 +1,228 @@
+# **Part 8. Phylogeny tree of whitesea002 sample's repeats**
+
+Laboratory journal: [Repeats_in_WS002](https://colab.research.google.com/drive/1OkZstxiyER9lR8A0Z1CeaEh1ha0Q4CgG?usp=sharing)
+
+## **Main Points**
+
+- The study focused on the **whitesea002 sample** and its "unknown" repeats.
+- Short sequences and simple sequence repeats (SSR) were filtered out.
+- Repeats were clustered using CD-HIT, and clusters contributing >0.1% of the genome were selected.
+- Eight ORFs were detected in this cluster, but they are small and likely non-functional, requiring further investigation.
+
+## **Introduction**
+
+In this section, the focus was placed exclusively on repeats from whitesea002 sample, that represents a new branch on the microsporidium phylogenetic tree and has a sufficiently large genome for an intracellular parasite. The study followed a comprehensive plan beginning with the extraction and preparation of "Unknown" repeats, followed by filtering out short sequences and simple sequence repeats (SSR).
+
+Next, the analysis involved clustering using CD-HIT and estimating the coverage of each cluster. Prior to alignment, only clusters contributing more than 0.1% to the genome were selected. The selected clusters were then aligned using MAFFT, and a phylogenetic tree was constructed with IQ-TREE.
+However, no large clusters have been identified that would occupy most of the genome.
+
+## **Methods**
+
+**Plan**:
+
+- De novo repeats identification using RepeatModeler+RepeatMasker
+- Extracting and preparing "Unknown" repeats
+- Filtering of short sequences and simple repeats (filter those have >30% simple repeats based on TRF output)
+```
+seqkit seq -g --min-len 150 ws002_unknown_repeats.fa > ws002_unknown_150.fa
+trf ws002_unknown_150.fa 2 5 7 80 10 50 1000 -l 10 -d -h -m > trf_ws002_solo.txt
+```
+- Clusterization (CD-HIT)
+```
+cd-hit-est -i ws002_filtered.fa \
+           -o ws002_filtered_cdhit \
+           -c 0.80 \
+           -n 4 \
+           -d 0 \
+           -M 16000 \
+           -T 2
+```
+- Cluster coverage estimation
+- Alignment (MAFFT)
+```
+mafft --auto ws002_plus_outgroup.fa > aligned_ws002_outgroup.fasta
+```
+- Building a tree with IQ-TREE (LINE/CR1 as an outgroup)
+```
+iqtree -s aligned_ws002_outgroup.fasta -m TEST -bb 1000 -nt AUTO -o DNAMerlin_1,DNAMerlin_20,DNAMerlin_32
+```
+- Selection of "interesting" families and a BLAST test
+
+## **Results**
+
+**De novo repeats identification**
+
+Repeats occupy only 23% of this organism’s genome, which is significantly less than what was found in the Sakhalin sample, with 11% being previously unknown. On the Kimura distribution graph (Figure 1), the peak is observed at 15-20, indicating a predominance of ancient or inactive repeats.
+A small percentage of the found repeats may be caused by poor assembly of this sample, as the RepeatModeler warned at the beginning of the work.
+
+```
+==================================================
+file name: ws002.fasta              
+sequences:        122740
+total length:  163565517 bp  (163563117 bp excl N/X-runs)
+GC level:         20.46 %
+bases masked:   36939752 bp ( 22.58 %)
+==================================================
+               number of      length   percentage
+               elements*    occupied  of sequence
+--------------------------------------------------
+Retroelements         8526      2815697 bp    1.72 %
+   SINEs:                0            0 bp    0.00 %
+   Penelope:             0            0 bp    0.00 %
+   LINEs:             6013      1125251 bp    0.69 %
+    CRE/SLACS            0            0 bp    0.00 %
+     L2/CR1/Rex       1285       208276 bp    0.13 %
+     R1/LOA/Jockey      97        13119 bp    0.01 %
+     R2/R4/NeSL          0            0 bp    0.00 %
+     RTE/Bov-B        1677       265503 bp    0.16 %
+     L1/CIN4             0            0 bp    0.00 %
+   LTR elements:      2513      1690446 bp    1.03 %
+     BEL/Pao             0            0 bp    0.00 %
+     Ty1/Copia           0            0 bp    0.00 %
+     Gypsy/DIRS1      2513      1690446 bp    1.03 %
+       Retroviral        0            0 bp    0.00 %
+
+DNA transposons      17873      9400081 bp    5.75 %
+   hobo-Activator     2069      1718083 bp    1.05 %
+   Tc1-IS630-Pogo     2155      1173316 bp    0.72 %
+   En-Spm                0            0 bp    0.00 %
+   MULE-MuDR          3162      1468164 bp    0.90 %
+   PiggyBac            107        50308 bp    0.03 %
+   Tourist/Harbinger    45        21266 bp    0.01 %
+   Other (Mirage,        0            0 bp    0.00 %
+    P-element, Transib)
+
+Rolling-circles          0            0 bp    0.00 %
+
+Unclassified:        74973     17762794 bp   10.86 %
+
+Total interspersed repeats:    29978572 bp   18.33 %
+
+
+Small RNA:               0            0 bp    0.00 %
+
+Satellites:              0            0 bp    0.00 %
+Simple repeats:     105931      5427241 bp    3.32 %
+Low complexity:      29491      1533939 bp    0.94 %
+==================================================
+```
+*Figure 1. Kimura plot*
+<img width="1368" alt="Снимок экрана 2025-03-06 в 22 33 17" src="https://github.com/user-attachments/assets/f5cda425-61c8-4f01-abaf-bacbbe4c7faa" />
+
+**The phylogenetic tree**
+
+A phylogenetic tree was constructed for 21 repeat clusters, each accounting for more than 0.1% of the genome, using repeats from the DNA/Merlin family—identified in this organism—as an outgroup. The tree is supplemented with data on the percentage of the genome each cluster occupies. 
+
+*Figure 2. Visualization of phylogeny tree*
+<img width="1075" alt="Снимок экрана 2025-03-06 в 23 10 07" src="https://github.com/user-attachments/assets/5e5489e7-d23c-49ef-ac4a-6481b6026146" />
+
+However, the alignment visualization remains suboptimal, likely due to the simultaneous analysis of different repeat types and the lack of an ORF (open reading frame) screening within them. Considering that repeats evolve much faster than the ORFs they contain, a more appropriate approach would have been to construct the tree based on more conserved regions of the repeats.
+
+---
+**Cluster 16 (occupies >0.65% of the genome)**
+
+As seen from the tree, there are no repeat clusters in this organism that stand out by the proportion of the genome they occupy—the largest cluster barely reaches 0.75%. Analysis of its representative sequence for ORFs revealed numerous small ORFs, which are unlikely to have functional significance.
+
+*Figure 3. ORFs that was found in rnd-4_family-61#Unknown*
+<img width="1237" alt="Снимок экрана 2025-03-06 в 23 15 45" src="https://github.com/user-attachments/assets/d022b6af-37f6-4726-9d94-752223ea0382" />
+
+The longest one, when subjected to a BLAST search, yielded the following results.
+
+Consesus sequence for cluster 16:
+```
+>rnd-4_family-61#Unknown ( Recon Family Size = 207, Final Multiple Alignment Size = 83 )
+ATCATATTTTTATAAAAATTTTATTTTTTAAATAAATAAAAATATACCCCATGAAGACAT
+ATAAACTGACAAAAGCCATTGAATTTTTGATCCTCATTNATTTTTTGGCGATGATTACTA
+TTAAAGCTGCGGATNNATCGGAATCTTGATACATTTGTGCCAACGACAAAAGGACCAGAG
+AAGGGATCAAAGACGAATTATTGAAAAATTCGAAGAAGAAGAAGATTTAAAATCAGAACT
+AAAATCATTTACTTTAAAACNTGATAAAATGACATTTAAAAAAACCGGGAGAAANAGTAN
+AGTAATGTTACATATACAAGCGTATTGAAAATTTAATCGAAGATATTATTTCAAATTTGC
+AAATATACGAAATTAGCATGGTACATCACAATGTATTGATAATAAAAATTTTACATTTAA
+AAAAAACATTTNCTGGATTAGTTANNAAATAGAGATANATTAAAAGGGGATGAACGTTTT
+CAAATAAAAATGGATATAATTGACAAAGTTGTATTAAAAAAATATTTAGTAGATTNTACA
+AGCCCGGAATTTTATTACGATAAAAAANCCGATAAATATAAGATTTATGACTTAAACTTA
+TAAATCTAAGCTTTCTAAACTTCTAACATCTAAAACTTCTAACTCTAAGACTTCTAAAAA
+TGGAATTATCGATTTTTGCATAAAATATTGGATTTTTATATTTGTGTTTACTATTTTGGT
+TGTCTCGGTTTGTTTAGGGCTTGGAATATATATTTACACNAGAAAAACATAATTATTCGT
+TTATCATAATCANATATTAAAAAATTTTTTTTTATATATTATTATAAAATCATATATTTT
+TATCTGTACTGATACATTTGTATCCNANTAACCAATTATTGTTTGCACAACCGTAAATTG
+TTTTTATAAANNGTGTAATTTAAATGTTTTTAAAATATAATTGGCCAGGGCAATAACTGG
+TTTTAGNTTTATACATGTATACGGTACCAATTTATCTATATTTATTAATAAAAACAAACT
+ANTTTTTTATTGAGTTTTTATAAATTGATCGTTTTATAAAACTAAAATAAAAATTTANTA
+TTTAATTAAATTTATCAAATTAATATTTNAAAAAGTAGTATTTTTACAAAACATAAAAAT
+TGTAGAATAAANTTGCATTTTTTCAACATTAAAATAAATAAAAATTCAGAATGAAATTTA
+ATCATATAAAATTAATTATANATATATCAAATGTTTAATGCACAAAATGGTTTAATATAA
+AATACANATTTTAAATAAAATTATTTTTTATATATATAAAACAAATTAANAATTATTGTA
+TTTAAATATTTATAAAAAAAAATTANTGTTATTAAATAAAGATAATTTTATGTAAAAAAA
+ATTGTTTATATAAAACATCCGTAATATATAATATAACATTATTTTAATATTAAGATTTTA
+TTCATTTGTTTTGATGTAGGNTCAAATCAANAAGTTGTATATATGTTTTGTTAGTTTTAT
+TATATATCATAAAATAATTTTTTTTGATTGCATAAATTATATTAAAATANAAAAAATGAT
+TGCATTTGTTAAAANTTTTATTAACAAAATTTATAGTTATATTTATATCATTAATTTATT
+AGNGTNNTNAANTTATTTNACGTTGACNTCAACATTTTTTTAATATCACATTCAATGNAA
+ACANACATTTTATTTATTATTTATTTTATGNTGTTTTTGTTNTTTTAAAACATAATATAT
+TTTGTTTTTAGTTTATGTTTAATANTTTTAAANAATAAAATTTATATTGTTTTTTCATAC
+TAAAATAATTGTTATTTATTGATAACAATAACCAATAAATAAAATATACAATATATATTT
+ATTTATTAATATTTANTAATTATTTTTAGTCATTTATATAAAATGTTANATATTATTTAT
+TNTATTGTTTGTTTTTTACAGCTACGCATATCATTTTAAGAAATTTATAATACAAATTAA
+CAATTATTTATTTCAACATTCTTGTATNGATAATTTAGTTTTTTTNATAGTATAACATTT
+TTTATATTTTGTATTGNTANAATTTTTACTTCAGATAGTATAAATATTGCTTAATAAATT
+AACTAAAGTTTTTAATCGTGTAAATTTGTATNCTTAAATAATTAGNTGTTTATATTNTTA
+AAAATTNCAAAAAAATATATTATAATATTTTGATTTATATTTTGAATTTAATTTTTNATT
+TTTATAAAAACTGCAAATAAGTAATATTAATACTTCAACACTAAAAAATTTAACATCAAG
+TACATTCGTTTTCAATTAAAATTTTTATTTTGTTGTTTTTTTTTGTATTTTACAATATGT
+TTAATATTATTATAATGTAAAAATTAATAATATATGTTTTTTCTATGTTGCTAATTGAAT
+TAAATAAAAACAATTATTGCTTGATAATAATTTTTAATGTTGTTTTGTTAAATTATTTTG
+TTCAACACTTATGTTGATAAAACCGCATTTCATTNTATTTGCAAAATTTGTCTGATACGG
+CTTGTCATACTCAATAAAGCTTTTAAAAAGCTGTCTTNAAATTGTTCGTTATNTACATCG
+CTTTAATTTTAAAATCACATTTACATCTAATAACTAATAAATGAAAATAAAAAAAAATTT
+GTAAAACCATATNATTTTGCAAAAACAAAAAATCGANTCTGNNTCGAGTCTAAGCAATGT
+GTTANTAGTAATGTATACAATAATTTAAATAGTTTGTATATATCNAAAAACATATTGTAT
+TTTACTTTGTAAAATATGTGGTTTTTATTGCCGAAAAATGTTATANAGTACATTTTTATA
+GTAAACTTATGCGAATNAATATTATTTATATTTAATTTTATTTTACAAAAATATGTCATT
+TAATTTACTAATTTTATAAAANTTATTTACAGCATTGTTTTGTTTNACAATTATTTATAA
+TAATTTCTATTTTTAAATTTATGCGTGTTTTAGTTTTTTATTTTNATTTTTTNNAANACT
+CGCTTTTTATATAACTAGATAAATGGCTTTTTCGTATTTNTGAATTTTATNAAAATACGT
+GATCTAATAGTAACAAAAAAATAGTACATAATCAATTTCAATATATTTTATTGTTGCACT
+TATTATTGTGTTTTTTATTNTTTGTTTNATACAACGTTTATTTTGTTTTATGNTTGATTT
+TCAATTAAAAAATTGTTATTTTAATTATTTTATTGTATTTTAAGTAAAATTATTGTAGTT
+GATTTGTGTTTATTAACGAAAAAAAACACAATTTTATTTACACATTTGTAAAGTATATTA
+TTCGGTTATTTTATATCAATATTCAATATAATTNAATAATGTATTTTAAAATGCGCATTT
+TTATAAATCAAGTTATAATTGTTATTTAACACAAACACAATAAATTATTGATGTAAATGT
+TTTATTACAAAATATGTATTTTATTTTTTAAAATAAATATAGATGTATAAATATAATTTA
+TAATACAATAACAATACTAGGCAATATTTTATATAAANAATATTTTATACAAACAAGNTT
+TATTGTTATATAATATTAATAAAAAAAAATTTGAACTAAACTGCCGTGCNTAAAAAAAAC
+ACGTCATTTTTAGTAAAGCAAAATTAATTCTATTTTATAAACATTAATTTTTGTAATTAG
+TTAGAAATTTTAAATNAATANTAAAGAATATGTTTAAAAAAATTTATTNAAAATGCGTTT
+TCTAATAATGCAAATCAAAAANATTAGTTTTATAAAGCAAANAAATAATTTGTCTAACGT
+GAATTTTTTACANATACANTGCAAAAAAAATTTTAAAAAACAAATCTCATTTTTTAAAAA
+AAAATATTAANAAACAAATTAATTGATAAAATTGCTTTATAAATAAAGCTGTTTTACTAA
+ANTTGCCAAATTGTTTAGCCGTAGCANGTAAAAAATCAGTAAAATACATACAGCCAATTA
+AAAAAAAATTAAATTACGATTAATAAAAAAATTATAAAAATGTATTTATTGAAGCAAAAA
+CATTCATGTACAGTCAAATAAAACTATTATTTGCCGTAAANGTANTATTAAATACCATTC
+ACATCACAAAAATACATTNAGAATTTTATTTGGTGTTTGGCGATATACAAACAAATAATA
+GTAAAAATTNTTTGTGTAAATGTGCCAAAAAAAATTTNTTAAACGTNAAAATTTATTTTG
+TGCAAAATATTTAGTGTTTAAATTCATATTTTTAACAGGCGTTTATTTTTTTTATTTATA
+TTTATTTATGANTTTAATATGTACATTATATAATTAATCATTTAAATTACGTGTTTTATG
+TTTGCGAAAATATTCCATACAAATAACATTGAAAATTTATAAANTCATNTAAAATCAGAG
+TCAAAAAAATTATGATATTGCTATTGTAAAATTTTGATTAATGAAAAAATAAATAATTAT
+ATTTTTTTGAAAATAGATAATGTTTTATTGAAATACTANAATATTTTTTTAAATAATATG
+CTCAGGAACTTTTGAATTTTATTTACATATNTTTTTCGATTATAGAAATTTTAGTTTTTA
+ATTAATTGGTTAGTTTTGTTATCAGTCATCATTTACTTTTTAAAATGGCGTGACTCAATT
+ANTNATGTNAAAAATAGGTAGTGGTCGTCATCTTCAGTTGCGTCAAAAATTTTTTTTTTN
+AATCATTAGCTATTTATTGTATTAATAAAAAAAAACATTAANTATATAAATAAACATTTT
+ATGTATTAAATTTTATTGAATTCAATNGCCATAAATAACAGCTAAAAAACTTTACACAAA
+CATTATTTTTATATAATTTTTATATTTAGCATTATTTTATATAATAAGAATATAATTGTA
+AGATCGTCTCTATGTTAAATAAAAANTATATTTATTCGATTTTTAATTTTAAATTTTAAT
+TATTTCTACTTTTTCATGTTTAAAATTTAAATGCAATTTACTTTTCATTTATTTTATGTA
+ATNACTATTAAAACAACTCAAATAAAAGAATGCTAAACATTAAATTAAAAAAAAAATTTA
+TGTATATGAATGTATATCAAATATTTNTATTAAATAAACGATTNTGCATGCTTATTTTTT
+AAAATTCACATTCAAAATCAATATGTTGTTATTATTTGTTTTAAAGTTTGATTTATCATT
+CAAAAATTGTAAAAAAATTTATTTTTATTGATTATTTGTTTTTTATTTAATAATTCGGTT
+ATACANTAACAACTTTATGTTTTATAATCAATCAATTGCACATTTTTNTGCTGTTGATAT
+ATTTAATATTATTCGTATATTTTATTAAAAAACTATTGATTTTATTTTTTATGATTTAAT
+TATAATGCATATTTTTTAGTAATTTATATAAATATNCTAAATCTTTTGTTTTCATATANT
+TATTT
+```
+*Figure 4. Motifs that was found in cluster 1*
+![Снимок экрана 2025-03-16 в 16 11 00](https://github.com/user-attachments/assets/53858e3f-fb60-47cc-b23f-9951768344ab)
+
